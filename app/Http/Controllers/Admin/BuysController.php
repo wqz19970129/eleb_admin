@@ -30,28 +30,17 @@ class BuysController extends Controller
         $this->validate($request,
             [
                 'name'=>'required',
-                'logo'=>'image',
+                //'logo'=>'image',
             ],
             [
                 'name.required'=>'分类不能为空',
-                'logo.image'=>'图片不能为空',
+                //'logo.image'=>'图片不能为空',
 
             ]
         );
-        $filename=$request->file('logo')->store('public/buys');
-        $client =App::make('aliyun-oss');
-        $object = "$filename";
-        try{
-            $client->uploadFile(getenv('OSS_BUCKET'), $object, storage_path('app/'.$filename));
-        } catch(OssException $e) {
-            printf(__FUNCTION__ . ": FAILED\n");
-            printf($e->getMessage() . "\n");
-            return;
-        }
-        print(__FUNCTION__ . ": OK" . "\n");
         Buy::create([
                 'name'=>$request->name,
-                'logo'=>'https://laravel-elem.oss-cn-beijing.aliyuncs.com/'.$filename,
+                'logo'=>$request->logo,
             ]
         );
         session()->flash('success','注册成功');
@@ -69,19 +58,19 @@ class BuysController extends Controller
         $this->validate($request,
             [
                 'name' => 'required',
-                'logo' => 'image',
+                //'logo' => 'image',
             ],
             [
                 'name.required' => '分类不能为空',
-                'logo.image' => '图片不能为空',
+                //'logo.image' => '图片不能为空',
 
             ]
         );
         if ($request->logo) {
-            $filename = $request->file('logo')->store('public/buys');
+            //$filename = $request->file('logo')->store('public/buys');
             $buy->update([
                     'name' => $request->name,
-                    'logo' => $filename,
+                    'logo' => $request->logo,
                 ]
             );
             session()->flash('success', '修改成功');

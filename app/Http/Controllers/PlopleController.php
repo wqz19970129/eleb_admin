@@ -19,7 +19,7 @@ class PlopleController extends Controller
         ]);
     }
     public function index(){
-        $ploples=Plople::all();
+        $ploples=Plople::paginate(3);
         return view('ploples.index',compact('ploples'));
     }
 

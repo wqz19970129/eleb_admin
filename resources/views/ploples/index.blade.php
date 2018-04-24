@@ -23,6 +23,7 @@
             </tr>
         @endforeach
     </table>
+    {{$ploples->links()}}
 @stop
 @section('js')
     <script>

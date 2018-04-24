@@ -22,10 +22,8 @@
                         <li><a href="{{route('buys.create')}}">商铺分类添加</a></li>
                         <li><a href="{{route('admin.create')}}">添加商铺</a></li>
                         <li><a href="{{route('plople.index')}}">商家管理</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li><a href="{{route('activity.index')}}">最新活动</a></li>
+
                     </ul>
                 </li>
             </ul>

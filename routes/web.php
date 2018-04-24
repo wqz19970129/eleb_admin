@@ -26,3 +26,7 @@ Route::delete('logout', 'LoginsController@destroy')->name('logout');
 Route::get('/', 'LoginsController@help')->name('help');
 Route::get('/password', 'PasswordController@index')->name('check');
 Route::post('/password', 'PasswordController@store')->name('update');
+//文件上传
+Route::post('/upload', 'UploaderController@upload');
+
+Route::resource('activity','ActivityController');
