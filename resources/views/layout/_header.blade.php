@@ -14,8 +14,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class=""><a href="{{route('admin.index')}}">管理列表 <span class="sr-only">(current)</span></a></li>
+               {!! \App\Menu::navs() !!}
+                {{--<li class=""><a href="{{route('admin.index')}}">管理列表 <span class="sr-only">(current)</span></a></li>
                 <li><a href="{{route('buys.index')}}">商铺分类显示</a></li>
+                <li><a href="{{route('regist.index')}}">会员管理</a></li>
+                <li><a href="{{route('rember.index') }}">管理员列表</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">商家管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -23,16 +26,28 @@
                         <li><a href="{{route('admin.create')}}">添加商铺</a></li>
                         <li><a href="{{route('plople.index')}}">商家管理</a></li>
                         <li><a href="{{route('activity.index')}}">最新活动</a></li>
-
+                        <li><a href="{{route('index')}}">商家日订单表</a></li>
+                        <li><a href="{{route('sex')}}">商家月订单表</a></li>
+                        <li><a href="{{route('good')}}">菜品日订单</a></li>
+                        <li><a href="{{route('goods')}}">菜品月订单</a></li>
                     </ul>
                 </li>
-            </ul>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RBAC <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{route('permission.index')}}">权限管理</a></li>
+                        <li><a href="{{route('roles.index')}}">角色管理</a></li>
+                    </ul>
+                </li>
+            </ul>--}}
+
             <form class="navbar-form navbar-left">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
+
             <ul class="nav navbar-nav navbar-right">
                 @guest
                 <li><a href="{{route('login')}}">登录</a></li>

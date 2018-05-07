@@ -12,6 +12,14 @@
                     <input type="text" class="form-control" id="email" placeholder="邮箱" name="email" value="{{old('email')}}">
                 </div>
                 <div class="form-group">
+                    <label>所属角色:</label>
+                    @foreach($roles as $role)
+                        <label class="checkbox-inline">
+                            <input type="checkbox" name="role_id[]" value="{{$role->id}}">{{$role->display_name}}
+                        </label>
+                    @endforeach
+                </div>
+                <div class="form-group">
                 <label for="password">密码</label>
                 <input type="password" class="form-control" id="password" placeholder="密码" name="password" value="{{old('password')}}">
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Email;
 use App\Plople;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,6 +36,7 @@ class PlopleController extends Controller
             return redirect()->route('plople.index');
         }else{
             DB::table('ploples')->where('id',$id)->update(['status'=>1]);
+            Email::email($plople->name);
             return redirect()->route('plople.index');
         }
     }
