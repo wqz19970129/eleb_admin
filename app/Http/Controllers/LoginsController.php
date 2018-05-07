@@ -46,4 +46,7 @@ class LoginsController extends Controller
         session()->flash('success','成功退出');
         return redirect('login');
     }
+    public function help(){
+        return redirect('login');
+    }
 }
