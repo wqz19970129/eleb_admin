@@ -54,8 +54,8 @@ class RemberController extends Controller
     //管理员列表
     public function index()
     {
-        dd(Auth::user());
-        dd(Auth::user()->can('rember.index'));
+        //dd(Auth::user());
+        Auth::user()->can('rember.index');
         $admins=Rember::paginate(3);
         return view('rembers.index',compact('admins'));
     }
