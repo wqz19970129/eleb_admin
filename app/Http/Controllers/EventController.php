@@ -95,8 +95,20 @@ class EventController extends Controller
         echo'success';
     }
     //抽奖
-    public function getone(Request $request){
-        $id=$request->event;
+    public function getone(Request $request,Event $event){
+        $id=$request->event1;
+        $prize=DB::table('prizes')->where('events_id',$id)->first();
+        if(!$prize){
+            session()->flash('danger','还未添加奖品');
+            return redirect()->route('events.index');
+        }
+        $a=$request->event;
+        //dd($a);
+        $bao= DB::select("select count(*) as count from eventmembers where events_id = '{$id}'");
+        if($bao[0]->count<$a){
+            session()->flash('danger','报名人数不够');
+            return redirect()->route('events.index');
+        }
         //dd($id);
 
         //dd($a);

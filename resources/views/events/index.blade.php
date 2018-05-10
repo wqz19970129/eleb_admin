@@ -28,7 +28,7 @@
                     <td>
                         <a href="{{ route('events.edit',['event'=>$event->id]) }}" class="btn btn-warning btn-sm">编辑</a>
                         <a href="{{ route('prize.create',['event'=>$event->id]) }}" class="btn btn-warning btn-sm">添加奖品</a>
-                        <a href="{{ route('getone',['event'=>$event->id]) }}" class="btn btn-warning btn-sm">抽奖</a>
+                        <a href="{{ route('getone',['event1'=>$event->id,'event'=>$event->signup_num]) }}" class="btn btn-warning btn-sm">抽奖</a>
                         <a href="{{ route('getall',['event'=>$event->id]) }}" class="btn btn-warning btn-sm">查看中奖情况</a>
                         {{--<a href="{{ route('menus.show',['menu'=>$menu]) }}" class="btn btn-primary btn-sm" >查看</a>--}}
                         <button class="btn btn-danger btn-sm">删除</button>

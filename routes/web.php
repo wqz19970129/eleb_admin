@@ -53,3 +53,28 @@ Route::resource('eventmember','EventmemberController');
 Route::get('getone', 'EventController@getone')->name('getone');
 //查看中奖人
 Route::get('getall', 'EventController@getall')->name('getall');
+//中文分词搜索
+Route::get('/search',function (){
+    //require ( "sphinxapi.php" );
+    $cl = new \App\SphinxClient();
+    $cl->SetServer ( '127.0.0.1', 9312);
+//$cl->SetServer ( '10.6.0.6', 9312);
+//$cl->SetServer ( '10.6.0.22', 9312);
+//$cl->SetServer ( '10.8.8.2', 9312);
+    $cl->SetConnectTimeout ( 10 );
+    $cl->SetArrayResult ( true );
+// $cl->SetMatchMode ( SPH_MATCH_ANY);
+    $cl->SetMatchMode ( SPH_MATCH_EXTENDED2);
+    $cl->SetLimits(0, 1000);//返回多少条数据1000数据
+    $info = 'x';//关键字
+    $res = $cl->Query($info, 'admins');//shopstore_search
+    //print_r($cl);
+    //print_r($res);
+    if($res['total']){
+        //查看有
+        $datas=collect($res['matches'])->pluck('id')->toArray();
+        dd($datas);//in id
+    }else{
+        //没有
+    }
+} );

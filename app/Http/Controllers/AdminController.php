@@ -18,9 +18,39 @@ class AdminController extends Controller
         ]);
 
     }
-    public function index(){
-        $admins=Admin::paginate(3);
-        return view('admins.index',compact('admins'));
+    public function index(Request $request){
+        $cl = new \App\SphinxClient();
+        $cl->SetServer ( '127.0.0.1', 9312);
+//$cl->SetServer ( '10.6.0.6', 9312);
+//$cl->SetServer ( '10.6.0.22', 9312);
+//$cl->SetServer ( '10.8.8.2', 9312);
+        $cl->SetConnectTimeout ( 10 );
+        $cl->SetArrayResult ( true );
+// $cl->SetMatchMode ( SPH_MATCH_ANY);
+        $cl->SetMatchMode ( SPH_MATCH_EXTENDED2);
+        $cl->SetLimits(0, 1000);//返回多少条数据1000数据
+        $key=$request->key;
+        $info = $key;//关键字
+        $res = $cl->Query($info, 'admins');//shopstore_search
+        //print_r($info);
+        //print_r($res);
+        if($res['total']){
+            //查看有
+            $datas=collect($res['matches'])->pluck('id')->toArray();
+            //dd($datas);//in id
+            $admins = DB::table('admins')
+                ->whereIn('id', $datas)
+                ->paginate(3);
+            //dd($admins);
+            return view('admins.index',compact('admins'));
+        }else{
+            //没有
+            //echo 'E有数据';
+            $admins=Admin::paginate(3);
+            return view('admins.index',compact('admins'));
+        }
+        //$admins=Admin::paginate(3);
+        //return view('admins.index',compact('admins'));
     }
     public function edit(Request $request,Admin $admin){
         $id=$admin->id;

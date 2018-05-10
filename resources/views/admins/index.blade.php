@@ -1,6 +1,12 @@
 @extends('layout.default')
 @section('title','首页')
 @section('content')
+    <form class="navbar-form navbar-left" method="get" action="{{route('admin.index')}}">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search" name="key">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
     <table class="table table-bordered" id="admins">
         <tr>
             <td>id</td>
@@ -22,7 +28,7 @@
                 <td>{{$admin->id}}</td>
                 <td>{{$admin->shop_name}}</td>
                 <td>@if($admin->shop_img)<img src="{{$admin->shop_img}}" alt="">@endif</td>
-                <td>{{$admin->brand1==1?'是':'否'}}</td>
+                <td>{{$admin->brand==1?'是':'否'}}</td>
                 <td>{{$admin->on_time==1?'是':'否'}}</td>
                 <td>{{$admin->fengniao==1?'是':'否'}}</td>
                 <td>{{$admin->bao==1?'是':'否'}}</td>
@@ -33,8 +39,7 @@
                 <td>{{$admin->status==1?'审核':'未审核'}}</td>
                 <td>
  {{--                   <a href="{{route('buys.show',['buy'=>$buy])}}" class="btn btn-primary btn-sm">查看</a>--}}
-                    <a href="{{route('admin.edit',['admin'=>$admin])}}" class="btn btn-warning btn-sm"> 是否审核</a>
-
+                    <a href="{{route('admin.edit',['admin'=>$admin->id])}}" class="btn btn-warning btn-sm"> 是否审核</a>
                     {{--<button class="btn btn-danger">删除</button>--}}
                 </td>
             </tr>
